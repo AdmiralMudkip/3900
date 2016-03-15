@@ -16,14 +16,14 @@ import multiverse.server.plugins.WorldManagerClient.TargetedExtensionMessage;
 import multiverse.server.util.Log;
 import multiverse.server.util.Logger;
 
-public class UnitSwitcher extends EnginePlugin {
+public class UnitSwitcherPlugin extends EnginePlugin {
 	public UnitSwitcher(){
-		super("Switcher");
-		setPluginType("Switcher");
+		super("UnitSwitcher");
+		setPluginType("UnitSwitcher");
 	}
 	
 	public static final Logger log = new Logger("SwitcherPlugin");
-	public static final MessageType MSG_TYPE_REQ_TRAINER_INFO = MessageType.intern("mv.REQ_TRAINER_INFO");
+	
     	
 		//not sure if we need this
 	 public void onActivate() {
@@ -32,14 +32,14 @@ public class UnitSwitcher extends EnginePlugin {
         registerHooks();
         //subscribe to training messages
         MessageTypeFilter filter = new MessageTypeFilter();
-        filter.addType(TrainerClient.MSG_TYPE_REQ_TRAINER_INFO);
-        filter.addType(TrainerClient.MSG_TYPE_REQ_SKILL_TRAINING);
+        // filter.addType(TrainerClient.MSG_TYPE_REQ_TRAINER_INFO);
+        // filter.addType(TrainerClient.MSG_TYPE_REQ_SKILL_TRAINING);
         Engine.getAgent().createSubscription(filter, this);
 
-        this.registerPluginNamespace(Unit.NAMESPACE, new TrainerSubObjectHook());
+        // this.registerPluginNamespace(Unit.NAMESPACE, new TrainerSubObjectHook());
 
         if (Log.loggingDebug)
-            log.debug("TrainerPlugin activated");
+            log.debug("UnitSwitcherPlugin activated");
     }
 	
     class SwitcherHook implements Hook {
