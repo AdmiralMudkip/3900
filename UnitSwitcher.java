@@ -1,8 +1,6 @@
 package multiverse.mars.plugins;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import multiverse.msgsys.Message;
 import multiverse.msgsys.MessageTypeFilter;
@@ -44,6 +42,10 @@ public class UnitSwitcher extends EnginePlugin {
             log.debug("TrainerPlugin activated");
     }
 	
-	
+    class SwitcherHook implements Hook {
+        public bolean processMessage(Message msg, int flags) {
+            
+        }
+    }
 }
 
