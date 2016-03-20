@@ -32,7 +32,7 @@ public class UnitSwitcherPlugin extends EnginePlugin {
         registerHooks();
         //subscribe to training messages
         MessageTypeFilter filter = new MessageTypeFilter();
-        // filter.addType(TrainerClient.MSG_TYPE_REQ_TRAINER_INFO);
+        filter.addType(TrainerClient.MSG_TYPE_SWITCH_CONTROLS);
         // filter.addType(TrainerClient.MSG_TYPE_REQ_SKILL_TRAINING);
         Engine.getAgent().createSubscription(filter, this);
 
@@ -41,6 +41,12 @@ public class UnitSwitcherPlugin extends EnginePlugin {
         if (Log.loggingDebug)
             log.debug("UnitSwitcherPlugin activated");
     }
+	
+	protected void registerHooks() {
+		getHookManager().addHook(UnitSwitcherClient.MSG_TYPE_SWITCH_CONTROLS, new SwitcherHook());
+	}
+	
+	
 	
     class SwitcherHook implements Hook {
         public bolean processMessage(Message msg, int flags) {

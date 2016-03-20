@@ -16,6 +16,32 @@ public class UnitSwitcherClient {
     }
     
     public static void switchClients(Long oid, Long targetOid, boolean status){
-        
+        SwitchMessage = new SwitchMessage(oid, targetOid, status);
+		Engine.getAgent().sendBroadcast(msg);
     }
+	
+	public SwitchMessage extends SubjectMessage
+	{
+		public SwitchMessage(){
+			super();
+		}
+		
+		public SwitchMessage(MessageType type) {
+            super(type);
+        }
+		
+		public SwitchMessage(MessageType type, Long oid, Long targetOid){
+			super(type, oid);
+			setTargetOid(targetOid);
+		}
+		
+		public Long getTargetOid() {
+            return this.targetOid;
+        }
+
+        public void setTargetOid(Long oid) {
+            this.targetOid = oid;
+        }
+		
+	}
 }
