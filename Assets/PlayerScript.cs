@@ -9,38 +9,21 @@ public class PlayerScript : MonoBehaviour {
     }
 
     float movementSpeed = 1;
-    float turningSpeed = 60;
+    float strafeSpeed = 1;
 
     public GameObject target;
+    public GameObject camera;
     public float damping = 1;
     Vector3 offset;
     public float smoothing = 15f, dampening = 0.1f;
     
     // Update is called once per frame
     void Update () {
-        float horizontal = Input.GetAxis("Horizontal") * turningSpeed * Time.deltaTime;
-        transform.Rotate(0, horizontal, 0);
+        float horizontal = Input.GetAxis("Horizontal") * strafeSpeed * Time.deltaTime;
+        transform.Translate(horizontal, 0, 0);
 
         float vertical = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
         transform.Translate(0, 0, vertical);
-
-        
-        if (Input.GetKey(KeyCode.W))
-        {
-
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-
-        }
 	}
 
     void LateUpdate()
@@ -48,6 +31,10 @@ public class PlayerScript : MonoBehaviour {
         Vector3 desiredPosition = target.transform.position + offset;
         Vector3 position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * damping);
         transform.position = position;
+
+        Vector3 cameraPosition = camera.transform.position;
+
+
 
         transform.LookAt(target.transform.position);
     }
