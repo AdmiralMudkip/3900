@@ -114,8 +114,9 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        bool rotate = Input.GetMouseButton(0);//        RPGInputUtils.GetButtonSafe(MouseRotateButton, false);
-        bool mouseLook = Input.GetMouseButton(1);//RPGInputUtils.GetButtonSafe(MouseLookButton, false);
+        bool rotate = RPGInputUtils.GetButtonSafe(MouseRotateButton, false);
+        bool mouseLook = RPGInputUtils.GetButtonSafe(MouseLookButton, false);
+        
 
         bool smoothRotation = SmoothRotation || SmoothAutoRotation;
         float smoothRotationSpeed = SmoothRotationSpeed;
