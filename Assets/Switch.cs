@@ -1,29 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SwitchScript : MonoBehaviour
+public class Switch : MonoBehaviour
 {
     int layerMask = -1;
     public GameObject camera;
     CameraController controller;
+    Movement moveSwitch;
 
     // Use this for initialization
     void Start()
     {
         controller = camera.GetComponent<CameraController>();
+        moveSwitch = GetComponent<Movement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        checkClick();
+        checkClick();  
     }
 
     void switchControl(RaycastHit hit)
     {
-        GetComponent<MovementScript>().active = false; //disable controls of this
-        hit.transform.gameObject.GetComponent<MovementScript>().active = true;
-        controller.Target = hit.transform;
+        try //if it doesn't have a movementscript component
+        {
+            hit.transform.gameObject.GetComponent<Movement>().active = true; // enable controls of target
+        }
+        catch (System.NullReferenceException)
+        {
+            return;
+        }
+        moveSwitch.active = false; //disable controls of this
+        controller.Target = hit.transform; //switch camera to target
     }
 
     void checkClick()

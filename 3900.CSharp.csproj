@@ -64,9 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CameraController.cs" />
-    <Compile Include="Assets\MovementScript.cs" />
-    <Compile Include="Assets\PlayerScript.cs" />
-    <Compile Include="Assets\SwitchScript.cs" />
+    <Compile Include="Assets\Movement.cs" />
+    <Compile Include="Assets\Switch.cs" />
     <Compile Include="Assets\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
