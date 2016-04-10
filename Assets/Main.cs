@@ -4,11 +4,16 @@ using System.Collections;
 public class Main : MonoBehaviour {
 
     public static GameObject player;
+    public GameObject camerass;
+    public Rigidbody body;
     public float movementSpeed = 10;
+
     // Use this for initialization
     void Start()
     {
         player = GameObject.Find("Player");
+        camerass = GameObject.Find("Main Camera");
+        body = player.GetComponent<Rigidbody>();
         CameraController.Target = player.transform;
     }
 
@@ -24,13 +29,15 @@ public class Main : MonoBehaviour {
                 {
                     player = hit.transform.gameObject;
                     CameraController.Target = player.transform;
+                    body = player.GetComponent<Rigidbody>();
                 }
         }
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        player.GetComponent<Rigidbody>().AddForce(movement * movementSpeed);
+        float moveHorizontal = Mathf.Cos(camerass.transform.eulerAngles.y * Mathf.Deg2Rad) * Input.GetAxis("Vertical") - Mathf.Sin(camerass.transform.eulerAngles.y * Mathf.Deg2Rad) * Input.GetAxis("Horizontal");
+        float moveVertical = Mathf.Sin(camerass.transform.eulerAngles.y * Mathf.Deg2Rad) * Input.GetAxis("Vertical") + Mathf.Cos(camerass.transform.eulerAngles.y * Mathf.Deg2Rad) * Input.GetAxis("Horizontal");
+        float goat = camerass.transform.eulerAngles.x;
+        Vector3 movement = new Vector3(moveVertical, 0.0f, moveHorizontal);
+        body.AddForce(movement * movementSpeed);
 
     }
 }
