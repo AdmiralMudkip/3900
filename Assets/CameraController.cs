@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     public bool DisplayDebugGizmos = true;
 
     public Camera Camera = null;
-    public Transform Target = null;
+    public static Transform Target = null;
 
     public float MinDistance = 1f;
     public float MaxDistance = 32f;
@@ -62,23 +62,6 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         Instance = this;
-
-        if (!HasCamera)
-        {
-            Camera = GetComponentInChildren<Camera>();
-        }
-
-        if (!HasTarget)
-        {
-            try
-            {
-                Target = GameObject.FindGameObjectWithTag("CameraTarget").transform;
-            }
-            catch
-            {
-
-            }
-        }
 
         if (HasCamera)
         {
