@@ -61,7 +61,7 @@ public class Main : MonoBehaviour {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 100))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 if (hit.transform.gameObject.tag == "Player") // if it's tag is defined as 'player,' could be changed to 'switchable' down the line
                 {
